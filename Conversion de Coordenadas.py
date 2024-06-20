@@ -7,7 +7,7 @@ Created on Wed Jun 12 23:31:42 2024
 
 
 class Coordenadas:
-    #Incluye  métodos que permiten convertir coordenadas de Grados Decimales (DD) a Grados, Minutos y Segundos (DMS), y viceversa.
+#Incluye  métodos que permiten convertir coordenadas de Grados Decimales (DD) a Grados, Minutos y Segundos (DMS), y viceversa.
    
     def dd_a_dms(dd):
         grados = int(dd)
@@ -19,6 +19,8 @@ class Coordenadas:
     def dms_a_dd(grados, minutos, segundos):
         dd = abs(grados) + minutos / 60 + segundos / 3600
         return dd if grados >= 0 else -dd
+    
+## se seleciona el tipo de conversion que el usuario quiere realizar 
 
 def menu():
     print("Seleccione el tipo de conversión que desea realizar:")
@@ -27,10 +29,15 @@ def menu():
     opcion = int(input(">> "))
     return opcion
 
+
+## Se pide ingresar los valore numericos de las coordenadas expresadas en Grados Decimales (DD)
+
 def obtener_coordenadas_dd():
     lat_dd = float(input("Ingrese el valor de la Latitud en DD: "))
     lon_dd = float(input("Ingrese el valor de la Longitud en DD: "))
     return lat_dd, lon_dd
+
+## Se pide ingresar los valore numericos de las coordenadas expresadas en Grados, Minutos y Segundos (DMS)
 
 def obtener_coordenadas_dms():
     lat_grados = int(input("Ingrese los grados de la Latitud: "))
@@ -40,14 +47,15 @@ def obtener_coordenadas_dms():
     lon_minutos = int(input("Ingrese los minutos de la Longitud: "))
     lon_segundos = float(input("Ingrese los segundos de la Longitud: "))
     return (lat_grados, lat_minutos, lat_segundos), (lon_grados, lon_minutos, lon_segundos)
-
+## se piden las opciones que el usuario quiere elijir
 def main():
     opcion = menu()
 
     if opcion == 1:
+       
         # Conversión de DD a DMS
+       
         lat_dd, lon_dd = obtener_coordenadas_dd()
-
         lat_grados, lat_minutos, lat_segundos = Coordenadas.dd_a_dms(lat_dd)
         lon_grados, lon_minutos, lon_segundos = Coordenadas.dd_a_dms(lon_dd)
 
@@ -58,9 +66,10 @@ def main():
         print(f"El valor de la longitud es:\n\t{abs(lon_grados)}° {lon_minutos}' {lon_segundos:.4f}'' {lon_hemisferio}")
 
     elif opcion == 2:
+        
         # Conversión de DMS a DD
+        
         (lat_grados, lat_minutos, lat_segundos), (lon_grados, lon_minutos, lon_segundos) = obtener_coordenadas_dms()
-
         lat_dd = Coordenadas.dms_a_dd(lat_grados, lat_minutos, lat_segundos)
         lon_dd = Coordenadas.dms_a_dd(lon_grados, lon_minutos, lon_segundos)
 
